@@ -1,0 +1,22 @@
+html {
+    font-size: 8px;
+
+}
+
+#container {
+    display: grid;
+
+    grid-template: repeat(16,1fr) / repeat(16,1fr) ;
+    border: 2px black solid;
+    width: 400px;
+    height: 400px;
+}
+
+.box {
+    border: 1px black solid;
+    background-color: rgb(255, 255, 255);
+}
+
+.filled {
+    background-color: black;
+}
