@@ -9,7 +9,7 @@ const clearbtn = document.querySelector('#clear');
 clearbtn.addEventListener('click', resetGrid);
 const colorbtn = document.querySelectorAll(".color");
 colorbtn.forEach((button) => button.addEventListener('click', changeFillMethod));
-//colorbtn.addEventListener;
+
 
 function changeFillMethod(e){
     const colorbtn = document.querySelectorAll(".color");
@@ -25,7 +25,7 @@ function resetGrid(){//remove all elements from grid so it can be resized, ask f
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
-    const newSize = prompt("What would you like the new size of the grid to be?")
+    const newSize = prompt("How many squares would you like per side?");
     if (!isNaN(newSize)) {
         populateGrid(newSize);
 
@@ -38,33 +38,60 @@ function resetGrid(){//remove all elements from grid so it can be resized, ask f
 
 function populateGrid(gridSize){//create grid with size of input
     const container = document.querySelector('#container');
-    container.setAttribute('style','grid-template: repeat('+gridSize+',1fr) / repeat('+gridSize+',1fr); background: hsl(360,50%,50%);');
-    for (let i = 1; i <=gridSize*gridSize;i++){
-        //console.log(i);
-        let tempElement = document.createElement('div');
-        //grid.createElement('div');
-        tempElement.classList.add('box');
-        //tempElement.textContent = 'test'+i;
-        container.appendChild(tempElement);
-
+    container.setAttribute('style','grid-template: repeat('+gridSize+',1fr) / repeat('+gridSize+',1fr); background-color: rgb(255,255,255);');
+    for (let i = 1; i <=gridSize; i++){
+        for (let j = 1; j <= gridSize; j++){
+            //console.log(i);
+            let tempElement = document.createElement('div');
+            //grid.createElement('div');
+            tempElement.classList.add('box');
+            tempElement.classList.add('x'+i+'y'+j);
+            tempElement.setAttribute('style','background-color: rgb(255,255,255);');
+            //tempElement.textContent = 'x'+i+'y'+j+'\n'+tempElement.getAttribute('style','background-color');
+            console.log(tempElement);
+            container.appendChild(tempElement);
+        }
     }
     const boxes = document.querySelectorAll('.box');
     boxes.forEach((square) => square.addEventListener('mouseenter', mouseOver));
 }
 function mouseOver(e) {
     const fillMethod = document.querySelector(".selected").innerText;
+    //console.log(e.target.classList[1]);
+    const fillTarget = document.querySelector("."+e.target.classList[1]);
+    //console.log(fillTarget);
+    //console.log(fillTarget.getAttribute('style','background-color'));
     if (fillMethod === 'Black'){
-        e.target.style.cssText = "background-color: hsl(0,0%,0%)";
+        e.target.style.cssText = "background-color: rgb(0,0,0)";
     }else if (fillMethod === 'Random'){
         e.target.style.cssText = "background-color: hsl("+Math.random()*360+","+Math.random()*100+"%,"+Math.random()*100+"%)";
-    }else if (fillMethod === 'Gradient'){
-        console.log(e);
+    }else if (fillMethod === 'Light Gradient'){
+        //console.log(e);
         //if (console.logconsole.log(e.fromElement.style.backgroundColor);
-        //if (e.bgColor === ""){
-         //   e.bgColor
-        //}
-    }
-    //this.classList.add('filled');
-};
 
+        // if (fillTarget.getAttribute('style','background-color') == ""){
+        // //if (e.fromElement.style.backgroundColor == ""){
+        // //    e.target.style.cssText = "background-color: rgb(250,250,250)";
+        //     alert("didn't expect this");
+
+        //     e.target.style.cssText = "background-color: rgb(250,250,250)";
+
+        // }else{
+            changeGradient(fillTarget, 25);
+        //}
+    }else if (fillMethod === 'Dark Gradient'){
+        changeGradient(fillTarget, -25);
+    }
+
+};
+function changeGradient(fillTarget, changeAmount){ 
+    let colors = fillTarget.getAttribute('style','background-color').split(',');
+            //colors.forEach((element) => console.log(element))
+            let red = Math.round(parseFloat(colors[0].split('(')[colors[0].split('(').length-1])+changeAmount);
+            let green = Math.round(parseFloat(colors[1])+changeAmount);
+            let blue = Math.round(parseFloat(colors[2].split(')')[0])+changeAmount);
+            //console.log("background-color: rgb("+red+", "+green+", "+blue+")");
+            fillTarget.setAttribute('style','background-color: rgb('+red+','+green+','+blue+');')
+            //e.target.style.cssText = "background-color: rgb("+red+", "+green+", "+blue+")";
+}
 

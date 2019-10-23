@@ -1,20 +1,41 @@
-html {
-    font-size: 8px;
+* {
+    margin: 0;
+    padding: 0;
+  font-family: "Arial", "Helvetica", sans-serif;
+}
 
+body, html {
+  font: arial;
+    font-size: 10px;
+    height: 100%;
+    width: 100%;
+  display: inline-block;
+}
+h1 {
+  font-size: 32px;
+  display: block;
+  text-align: center;
+  padding: 10px 10px 0px 10px;
+}
+
+body {
+  text-align: center;
 }
 
 #container {
     display: grid;
-
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,0);
     grid-template: repeat(16,1fr) / repeat(16,1fr) ;
     border: 2px black solid;
-    width: 400px;
-    height: 400px;
+    width: 600px;
+    height: 600px;
 }
 
 .box {
     border: 1px black solid;
-    background-color: hsl(360, 100%, 100%);
+    background-color: rgb(255, 255, 255);
 }
 
 .filled {
@@ -38,8 +59,11 @@ button {
     color: white;
 }
 
-#gradient { 
+#lightgradient { 
     background-image: linear-gradient(to right, black, white);
+}
+#darkgradient { 
+    background-image: linear-gradient(to right, white, black);
 }
 
 #rainbow {
