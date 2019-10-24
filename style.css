@@ -36,6 +36,10 @@ body {
 .box {
     border: 1px black solid;
     background-color: rgb(255, 255, 255);
+    
+}
+.smooth {
+    transition: all 0.25s ease; 
 }
 
 .filled {
@@ -65,6 +69,12 @@ button {
 #darkgradient { 
     background-image: linear-gradient(to right, white, black);
 }
+.on {
+    background-color: green;
+}
+.off {
+    background-color: red;
+}
 
 #rainbow {
     color: white ;
@@ -72,8 +82,8 @@ button {
     background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
 }
 
-#selected {
-    border-style: none;
+.selected {
+    border-style: thick;
     border: floralwhite;
 
 }
